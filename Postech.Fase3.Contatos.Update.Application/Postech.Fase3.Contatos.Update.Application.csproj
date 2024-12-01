@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Serilog" Version="4.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Postech.Fase3.Contatos.Update.Domain\Postech.Fase3.Contatos.Update.Domain.csproj" />
+    <ProjectReference Include="..\Postech.Fase3.Contatos.Update.Infra.CrossCuting\Postech.Fase3.Contatos.Update.Infra.CrossCuting.csproj" />
+    <ProjectReference Include="..\Postech.Fase3.Contatos.Update.Infra\Postech.Fase3.Contatos.Update.Infra.csproj" />
+  </ItemGroup>
+
+</Project>
