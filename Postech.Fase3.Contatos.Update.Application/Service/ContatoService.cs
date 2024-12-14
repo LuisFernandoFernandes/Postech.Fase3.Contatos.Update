@@ -16,8 +16,8 @@ public class ContatoService(IContatoRepository _contatoRepository) : IContatoSer
     {
         try
         {
-            if (!await _contatoRepository.ExisteAsync(contato))
-                return new ServiceResult<bool>(new ValidacaoException("Contato não encontrado"));
+            if (await _contatoRepository.ExisteAsync(contato))
+                return new ServiceResult<bool>(new ValidacaoException("Dados alterados já cadastrados para outro contato"));
 
             await _contatoRepository.Atualizar(contato);
 
