@@ -22,6 +22,6 @@ public class ContatoRepository(AppDBContext context) : IContatoRepository
     public async Task<bool> ExisteAsync(Contato c)
     {
         return await context.Contatos.AsNoTracking().AnyAsync(contato =>
-            contato.Nome.Equals(c.Nome) && contato.Telefone.Equals(c.Telefone) && contato.DddId.Equals(c.DddId));
+            contato.ContatoId != c.ContatoId && contato.Nome.Equals(c.Nome) && contato.Telefone.Equals(c.Telefone) && contato.DddId.Equals(c.DddId));
     }
 }
