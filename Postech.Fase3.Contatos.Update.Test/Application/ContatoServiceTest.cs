@@ -33,6 +33,10 @@ public class ContatoServiceTest
     {
         //arrange
         contatoRepository
+        .Setup(x => x.ExisteAsync(_contato))
+        .ReturnsAsync(false);
+
+        contatoRepository
             .Setup(x => x.Atualizar(_contato))
             .ReturnsAsync(_contato);
 
@@ -52,7 +56,7 @@ public class ContatoServiceTest
         //arrange
         contatoRepository
             .Setup(x => x.ExisteAsync(It.IsAny<Contato>()))
-            .ReturnsAsync(false);
+            .ReturnsAsync(true);
 
         var contatoService = new ContatoService(contatoRepository.Object);
 
@@ -62,13 +66,17 @@ public class ContatoServiceTest
         //assert
         Assert.False(contatoResult.IsSuccess);
         var ex = Assert.IsType<ValidacaoException>(contatoResult.Error);
-        Assert.Equal("Contato não encontrado", ex.Message);
+        Assert.Equal("Dados alterados já cadastrados para outro contato", ex.Message);
     }
 
     [Fact]
     public async Task ContatoService_Atualizar_ComErro()
     {
         //arrange
+        contatoRepository
+        .Setup(x => x.ExisteAsync(_contato))
+        .ReturnsAsync(false);
+
         contatoRepository
             .Setup(x => x.Atualizar(It.IsAny<Contato>()))
             .ThrowsAsync(new Exception("Erro ao Atualizar"));

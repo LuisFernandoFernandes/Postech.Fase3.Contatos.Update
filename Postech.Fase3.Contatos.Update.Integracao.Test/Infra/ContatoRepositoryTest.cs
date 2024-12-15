@@ -38,12 +38,19 @@ public class ContatoRepositoryTest
     [Fact]
     public async Task Existe_DeveRetornarTrueSeContatoExiste()
     {
-        var contato = new Contato(Guid.NewGuid(), "Nome 1", "999878587", "teste@email.com.br", 11, DateTime.Now);
-        context.Contatos.Add(contato);
+        // arrange
+        var contatoExistente = new Contato(Guid.NewGuid(), "Nome 1", "999878587", "teste@exemplo.com.br", 11, DateTime.Now);
+        context.Contatos.Add(contatoExistente);
         await context.SaveChangesAsync();
 
-        var result = await repository.ExisteAsync(contato);
+        // Cria um segundo contato com os mesmos Nome, Telefone e DddId
+        var contatoNovo = new Contato(Guid.NewGuid(), "Nome 1", "999878587", "outro@exemplo.com.br", 11, DateTime.Now);
 
+        // act
+        var result = await repository.ExisteAsync(contatoNovo);
+
+        // assert
         Assert.True(result);
     }
+
 }
