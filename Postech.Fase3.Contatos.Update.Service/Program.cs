@@ -20,7 +20,7 @@ var builder = Host
             });
         });
 
-        webBuilder.UseUrls("http://+:5001");
+        webBuilder.UseUrls("http://+:5002");
     })
     .ConfigureServices((hostContext, services) =>
     {
